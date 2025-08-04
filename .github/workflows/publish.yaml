@@ -24,11 +24,9 @@ jobs:
 
       - uses: taiki-e/install-action@v2
         with:
-          tool: wkg
+          tool: just,wkg
 
-      - run: cd rust/concat-text && . build.sh
-      - run: cd rust/http-request && . build.sh
-      - run: cd rust/nth-prime-number && . build.sh
+      - run: just build-rust
 
       - name: Create GitHub Release and Upload WASM Asset
         uses: softprops/action-gh-release@v1
@@ -36,9 +34,9 @@ jobs:
           # This command will automatically create a release using the tag name
           # that triggered the workflow. It will then upload the files listed below.
           files: |
-            rust/concat-text/concat_text.wasm
-            rust/http-request/http_request.wasm
-            rust/nth-prime-number/nth_prime_number.wasm
+            concat_text.wasm
+            http_request.wasm
+            nth_prime_number.wasm
         env:
           # The GITHUB_TOKEN is a secret automatically provided by GitHub Actions
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
