@@ -13,8 +13,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "bun tsc && bun generate-types && bun build:js && bun build:wasm",
-    "tsc": "tsc",
+    "build": "bun typecheck && bun generate-types && bun build:js && bun build:wasm",
+    "typecheck": "tsc",
     "build:js": "rslib build",
     "generate-types": "jco types wit/ -o generated/types",
     "build:wasm": "jco componentize -w wit -o http_request.wasm dist/index.js"

@@ -6,7 +6,7 @@ export default defineConfig({
       autoExternal: false,
       bundle: true,
       format: "esm",
-      syntax: ["node 18"],
+      syntax: ["node 22"],
       dts: true,
       output: {
         target: "web",
