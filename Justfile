@@ -14,3 +14,11 @@ build-go:
   cp go/http-request/http_request.wasm dist/go_http_request.wasm
   cd go/nth-prime-number && . ./build.sh
   cp go/nth-prime-number/nth_prime_number.wasm dist/go_nth_prime_number.wasm
+
+build-typescript:
+  cd typescript/concat-text && . ./build.sh
+  cp typescript/concat-text/concat_text.wasm dist/typescript_concat_text.wasm
+  cd typescript/http-request && . ./build.sh
+  cp typescript/http-request/http_request.wasm dist/typescript_http_request.wasm
+  cd typescript/nth-prime-number && . ./build.sh
+  cp typescript/nth-prime-number/nth_prime_number.wasm dist/typescript_nth_prime_number.wasm
