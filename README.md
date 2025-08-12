@@ -18,6 +18,11 @@ Currently this repo contains creating wasm component using the following languag
   - component to calculate the [nth prime number](./go/nth-prime-number/)
   - component that does a [http call to jsonplaceholder](./go/http-request/)
 
+- Typescript
+  - component to combine two string into one string, called [concat-text](./typescript/concat-text) 
+  - component to calculate the [nth prime number](./typescript/nth-prime-number/)
+  - component that does a [http call to jsonplaceholder](./typescript/http-request/)
+
 For more examples with other programming languages take a look at the following repos:
 
 - [wasmcloud main repo](https://github.com/wasmCloud/wasmCloud/tree/main/examples)
@@ -39,6 +44,8 @@ This project uses [just](https://github.com/casey/just), [wkg](https://github.co
 - Golang
   - golang [install golang](https://go.dev/doc/install)
   - tinygo [install tinygo](https://tinygo.org/getting-started/install/)
+- Typescript:
+  - bun [install bun](https://bun.com/docs/installation)
 
 ## Building
 
@@ -54,4 +61,10 @@ To build the golang components run:
 
 ```sh
 just build-go
+```
+
+### Typescript
+to build the typescript components run:
+```sh
+just build-typescript
 ```

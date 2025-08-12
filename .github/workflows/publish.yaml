@@ -33,6 +33,7 @@ jobs:
 
       - run: just build-rust
       - run: just build-go
+      - run: just build-typescript
 
       - name: Create GitHub Release and Upload WASM Asset
         uses: softprops/action-gh-release@v1
