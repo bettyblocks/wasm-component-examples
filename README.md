@@ -1,6 +1,6 @@
 # Wasm component examples
 
-A collection of example wasm components
+A collection of example wasm components. The example Wasm components are also available in [the releases](https://github.com/bettyblocks/wasm-component-examples/releases)
 
 ## Goal
 
