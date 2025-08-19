@@ -28,7 +28,7 @@ jobs:
 
       - uses: taiki-e/install-action@v2
         with:
-          tool: just,wkg,wasm-tools
+          tool: just,wkg,wasm-tools,bun
 
       - run: just build-rust
       - run: just build-go
