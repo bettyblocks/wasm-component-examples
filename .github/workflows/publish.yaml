@@ -22,10 +22,9 @@ jobs:
         with:
           targets: wasm32-wasip2
 
-      - name: Install TinyGo
-        uses: tinygo-org/setup-tinygo@v1
+      - uses: acifani/setup-tinygo@v2
         with:
-          version: stable
+          tinygo-version: '0.30.0'
 
       - uses: taiki-e/install-action@v2
         with:
