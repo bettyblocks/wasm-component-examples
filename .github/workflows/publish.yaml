@@ -26,9 +26,11 @@ jobs:
         with:
           tinygo-version: '0.37.0'
 
+      - uses: oven-sh/setup-bun@v2
+
       - uses: taiki-e/install-action@v2
         with:
-          tool: just,wkg,wasm-tools,bun
+          tool: just,wkg,wasm-tools
 
       - run: just build-rust
       - run: just build-go
