@@ -13,7 +13,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "bun typecheck && bun generate-types && bun build:js && bun build:wasm",
+    "build": "bun generate-types && bun typecheck && bun build:js && bun build:wasm",
     "typecheck": "tsc",
     "build:js": "rslib build",
     "generate-types": "jco types wit/ -o generated/types",
