@@ -5,11 +5,11 @@ wit_bindgen::generate!({ generate_all });
 struct Calculator;
 
 impl calculator::Guest for Calculator {
-    fn add(a: i64, b: i64) -> i64 {
+    fn add(a: f64, b: f64) -> f64 {
         a + b
     }
 
-    fn subtract(a: i64, b: i64) -> i64 {
+    fn subtract(a: f64, b: f64) -> f64 {
         a - b
     }
 
