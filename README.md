@@ -9,19 +9,22 @@ This repo will give some examples on how to create your own wasm components, whi
 Currently this repo contains creating wasm component using the following languages:
 
 - Rust
-  - component to combine two string into one string, called [concat-text](./rust/concat-text) 
+  - component to combine two string into one string, called [concat-text](./rust/concat-text)
   - component to calculate the [nth prime number](./rust/nth-prime-number/)
   - component that does a [http call to jsonplaceholder](./rust/http-request/)
+  - component that does simple arithmetic (./rust/calculator)
 
 - Golang
-  - component to combine two string into one string, called [concat-text](./go/concat-text) 
+  - component to combine two string into one string, called [concat-text](./go/concat-text)
   - component to calculate the [nth prime number](./go/nth-prime-number/)
   - component that does a [http call to jsonplaceholder](./go/http-request/)
+  - component that does simple arithmetic (./go/calculator)
 
 - Typescript
-  - component to combine two string into one string, called [concat-text](./typescript/concat-text) 
+  - component to combine two string into one string, called [concat-text](./typescript/concat-text)
   - component to calculate the [nth prime number](./typescript/nth-prime-number/)
   - component that does a [http call to jsonplaceholder](./typescript/http-request/)
+  - component that does simple arithmetic (./typescript/calculator)
 
 For more examples with other programming languages take a look at the following repos:
 
@@ -67,4 +70,10 @@ just build-go
 to build the typescript components run:
 ```sh
 just build-typescript
+```
+
+### All
+
+```
+just build
 ```
