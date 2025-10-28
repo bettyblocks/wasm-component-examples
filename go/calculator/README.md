@@ -1,6 +1,6 @@
-# Concat text
+# Calculator
 
-wasm component concats two string together with a space.
+wasm component that does some calculating.
 
 ## prerequirements
 * Install `tinygo` [install tinygo](https://tinygo.org/getting-started/install/)

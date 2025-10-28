@@ -1,6 +1,6 @@
-# Concat text
+# Calculator
 
-wasm component concats two string together with a space.
+wasm component that does some calculating.
 
 ## prerequirements
 * bun [install bun](https://bun.com/docs/installation)

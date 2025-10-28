@@ -1,4 +1,4 @@
-# Concat text
+# Calculator
 
 wasm component that does some calculating.
 
