@@ -1,0 +1,6 @@
+#! /usr/bin/env bash
+
+WASI_SDK_DIR=/opt/wasi-sdk
+CC=${WASI_SDK_DIR}/bin/clang
+
+${CC} -target wasm32-wasip2 -mexec-model=reactor -Wunused main.c component.c main_component_type.o -o concat_text.wasm
