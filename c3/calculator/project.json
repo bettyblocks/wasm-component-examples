@@ -45,6 +45,8 @@
       // and overrides of global settings here.
     },
   },
+    // Include the standard library. For minimal size, we disable it
+  "use-stdlib": false,
   // Global settings.
   // CPU name, used for optimizations in the LLVM backend.
   "cpu": "generic",

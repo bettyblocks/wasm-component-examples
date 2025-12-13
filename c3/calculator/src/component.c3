@@ -1,5 +1,4 @@
 module calculator;
-import std::io;
 
 fn double add(double a, double b) @export("exports_betty_blocks_calculator_calculator_add")
 {
