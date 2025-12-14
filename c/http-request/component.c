@@ -31,7 +31,7 @@ bool exports_betty_blocks_http_request_http_run(main_string_t *endpoint, main_st
         return false;
     }
 
-    char *url = "example.com";
+    char *url = "jsonplaceholder.typicode.com";
     main_string_t url_string = {};
     main_string_set(&url_string, url);
 
@@ -105,6 +105,7 @@ bool exports_betty_blocks_http_request_http_run(main_string_t *endpoint, main_st
         fprintf(stderr, "unable to read from body stream");
         return false;
     }
+    // fetching still doesnt work (or only fetches partial response)
 
     fprintf(stderr, "body size: %d\n", response_bytes.len);
     fprintf(stderr, "body contents: %s\n", response_bytes.ptr);
