@@ -1,6 +1,17 @@
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "main.h"
+
+#define MAX_CHUNKS 128
+#define MAX_CHUNK_SIZE 1024
+
+struct captured_chunk {
+    size_t len;
+    uint8_t data[MAX_CHUNK_SIZE];
+};
+
+
 
 bool exports_betty_blocks_http_request_http_run(main_string_t *endpoint, main_string_t *ret, main_string_t *err) {
 
@@ -40,7 +51,12 @@ bool exports_betty_blocks_http_request_http_run(main_string_t *endpoint, main_st
         return false;
     }
 
-    if(!wasi_http_types_method_outgoing_request_set_path_with_query(borrowed_req, endpoint)) {
+    main_string_t processed_endpoint = {};
+    main_string_set(&processed_endpoint, "/");
+    strncat((char *)processed_endpoint.ptr, (char *)endpoint->ptr, endpoint->len);
+    processed_endpoint.len = strlen((char *)processed_endpoint.ptr);
+
+    if(!wasi_http_types_method_outgoing_request_set_path_with_query(borrowed_req, &processed_endpoint)) {
         fprintf(stderr, "invalid path");
         return false;
     }
@@ -100,15 +116,51 @@ bool exports_betty_blocks_http_request_http_run(main_string_t *endpoint, main_st
 
     main_list_u8_t response_bytes = {};
     wasi_io_streams_stream_error_t response_error = {};
+    static struct captured_chunk chunks[MAX_CHUNKS];
+    static size_t chunk_count = 0;
 
-    if(!wasi_io_streams_method_input_stream_blocking_read(borrow_input_stream, 1024*1024, &response_bytes, &response_error)) {
-        fprintf(stderr, "unable to read from body stream");
+    while(wasi_io_streams_method_input_stream_blocking_read(borrow_input_stream, 1024, &response_bytes, &response_error)) {
+        // check error and/or 'save' response bytes
+        if (chunk_count < MAX_CHUNKS) {
+            chunks[chunk_count].len = response_bytes.len;
+            memcpy(chunks[chunk_count].data,
+                response_bytes.ptr,
+                response_bytes.len);
+            chunk_count++;
+        } else {
+            fprintf(stderr, "body to large > 128kb");
+            return false;
+        }
+    }
+    if(response_error.tag != 0) {
+        // fprintf(stderr, "response_error.tag %d\n", response_error.tag);
+
+        // wasi_io_error_borrow_error_t error_borrowed = wasi_io_error_borrow_error(response_error.val.last_operation_failed);
+        // main_string_t debug_string = {};
+        // wasi_io_error_method_error_to_debug_string(error_borrowed, &debug_string);
+        // fprintf(stderr, "%s\n", debug_string.ptr);
+        // main_string_free(&debug_string);
+    }
+
+    size_t total_len = 0;
+    for (size_t i = 0; i < chunk_count; i++) {
+        total_len += chunks[i].len;
+    }
+    uint8_t *all_bytes = malloc(total_len);
+    if (!all_bytes) {
+        fprintf(stderr, "unable to allocate response data");
         return false;
     }
-    // fetching still doesnt work (or only fetches partial response)
 
-    fprintf(stderr, "body size: %d\n", response_bytes.len);
-    fprintf(stderr, "body contents: %s\n", response_bytes.ptr);
+    size_t offset = 0;
+    for (size_t i = 0; i < chunk_count; i++) {
+        memcpy(all_bytes + offset,
+            chunks[i].data,
+            chunks[i].len);
+        offset += chunks[i].len;
+    }
+
+    main_string_set(ret, (char *)all_bytes);
 
     wasi_io_streams_input_stream_drop_own(input_stream);
     wasi_http_types_result_result_own_incoming_response_error_code_void_free(&result);
