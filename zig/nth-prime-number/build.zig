@@ -1,8 +1,5 @@
 const std = @import("std");
 
-// zig build-exe -target wasm32-wasi -O ReleaseSmall -mexec-model=reactor -lc component.zig main.c main_component_type.o
-// wasm-tools component new ./component.wasm --adapt wasi_snapshot_preview1=wasi_snapshot_preview1.reactor.wasm -o concat_text.wasm
-
 pub fn build(b: *std.Build) void {
     const target = b.resolveTargetQuery(.{
         .cpu_arch = .wasm32,
@@ -31,7 +28,7 @@ pub fn build(b: *std.Build) void {
 
     const wasm_tools = b.addSystemCommand(&.{ "wasm-tools", "component", "new", "--adapt", "wasi_snapshot_preview1=wasi_snapshot_preview1.reactor.wasm" });
     wasm_tools.addArtifactArg(exe);
-    wasm_tools.addArgs(&.{ "-o", "concat_text.wasm" });
+    wasm_tools.addArgs(&.{ "-o", "nth_prime_number.wasm" });
     wasm_tools.step.dependOn(&install_component.step);
 
     b.getInstallStep().dependOn(&wasm_tools.step);
@@ -39,5 +36,3 @@ pub fn build(b: *std.Build) void {
     const component_step = b.step("component", "Build the WebAssembly component");
     component_step.dependOn(&wasm_tools.step);
 }
-
-// https://github.com/bytecodealliance/wasmtime/releases/download/v40.0.0/wasi_snapshot_preview1.reactor.wasm
