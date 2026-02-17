@@ -1,4 +1,4 @@
-package betty-blocks:nth-prime-number;
+package betty-blocks:nth-prime-number@0.1.0;
 
 interface nth-prime-number {
   calculate: func(n: u16) -> result<u32, string>;
