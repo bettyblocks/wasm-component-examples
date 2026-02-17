@@ -1,4 +1,4 @@
-package betty-blocks:http-request;
+package betty-blocks:http-request@0.1.0;
 
 interface http {
   run: func(endpoint: string) -> result<string, string>;
